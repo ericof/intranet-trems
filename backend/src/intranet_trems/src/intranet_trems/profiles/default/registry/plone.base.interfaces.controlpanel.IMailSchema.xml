@@ -5,5 +5,6 @@
            purge="false"
   >
     <value key="email_from_name">Nova Intranet TRE-MS</value>
+    <value key="email_from_address">intranet@tre-ms.jus.br</value>
   </records>
 </registry>
