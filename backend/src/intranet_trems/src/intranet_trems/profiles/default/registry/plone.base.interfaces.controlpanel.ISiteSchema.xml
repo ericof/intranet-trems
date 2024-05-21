@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<registry>
+  <records interface="plone.base.interfaces.controlpanel.IMailSchema"
+           prefix="plone"
+           purge="false"
+  >
+    <value key="email_charset">utf-8</value>
+    <value key="email_from_address">intranet@tre-ce.jus.br</value>
+    <value key="site_title">Nova Intranet TRE-MS</value>
+  </records>
+</registry>
