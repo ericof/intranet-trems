@@ -39,6 +39,7 @@ class TestPessoa:
     @pytest.mark.parametrize(
         "behavior",
         [
+            "intranet_trems.contact_info",
             "plone.namefromtitle",
             "plone.leadimage",
             "plone.shortname",
