@@ -11,6 +11,9 @@ import ClimaView from './components/Blocks/Clima/View';
 // Icones
 import climaSVG from '@plone/volto/icons/cloud.svg';
 
+// reducers
+import { climaData } from './reducers/climaData';
+
 const applyConfig = (config) => {
   config.settings = {
     ...config.settings,
@@ -58,6 +61,10 @@ const applyConfig = (config) => {
       });
     }
   });
+  config.addonReducers = {
+    ...config.addonReducers,
+    climaData,
+  };
   return config;
 };
 
