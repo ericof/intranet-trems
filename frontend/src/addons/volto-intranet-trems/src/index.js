@@ -1,6 +1,15 @@
+import { cloneDeep } from 'lodash';
+
 // Visoes
 import AreaView from './components/View/AreaView';
 import PessoaView from './components/View/PessoaView';
+
+// Blocos
+import ClimaEdit from './components/Blocks/Clima/Edit';
+import ClimaView from './components/Blocks/Clima/View';
+
+// Icones
+import climaSVG from '@plone/volto/icons/cloud.svg';
 
 const applyConfig = (config) => {
   config.settings = {
@@ -14,6 +23,41 @@ const applyConfig = (config) => {
     Area: AreaView,
     Pessoa: PessoaView,
   };
+
+  // Blocos
+  config.blocks.blocksConfig.climaBlock = {
+    id: 'climaBlock',
+    title: 'Clima',
+    group: 'common',
+    icon: climaSVG,
+    view: ClimaView,
+    edit: ClimaEdit,
+    restricted: false,
+    mostUsed: true,
+    sidebarTab: 1,
+    blockHasOwnFocusManagement: false,
+  };
+  // Adiciona blocos ao Grid
+  const localBlocks = ['climaBlock'];
+
+  // Add Blocks to gridBlock
+  // It's important to maintain the chain, and do not introduce pass by reference in
+  // the internal `blocksConfig` object, so we clone the object to avoid this.
+  ['gridBlock'].forEach((blockId) => {
+    const block = config.blocks.blocksConfig[blockId];
+    if (
+      block !== undefined &&
+      block.allowedBlocks !== undefined &&
+      block.blocksConfig !== undefined
+    ) {
+      block.allowedBlocks = [...block.allowedBlocks, ...localBlocks];
+      localBlocks.forEach((blockId) => {
+        block.blocksConfig[blockId] = cloneDeep(
+          config.blocks.blocksConfig[blockId],
+        );
+      });
+    }
+  });
   return config;
 };
 
