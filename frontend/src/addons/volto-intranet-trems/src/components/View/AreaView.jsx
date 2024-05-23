@@ -2,10 +2,11 @@
  * AreaView view component.
  * @module components/View/AreaView
  */
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Table } from 'semantic-ui-react';
+import { List, Table } from 'semantic-ui-react';
+import { Icon, UniversalLink } from '@plone/volto/components';
+import houseSVG from '@plone/volto/icons/home.svg';
 
 /**
  * AreaView view component.
@@ -62,6 +63,26 @@ const AreaView = (props) => {
           </Table.Body>
         </Table>
       </div>
+      <List className={'subareas'}>
+        {content.items &&
+          content.items.map(function (area, i) {
+            return (
+              <List.Item key={i}>
+                <div className={'icon'}>
+                  <Icon name={houseSVG} size="24px" />
+                </div>
+                <List.Content>
+                  <List.Header>
+                    <UniversalLink href={area['@id']}>
+                      {area.title}
+                    </UniversalLink>
+                  </List.Header>
+                  <List.Description>{area.description}</List.Description>
+                </List.Content>
+              </List.Item>
+            );
+          })}
+      </List>
     </div>
   );
 };
